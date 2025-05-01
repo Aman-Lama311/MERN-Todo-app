@@ -11,27 +11,24 @@ const SignIn = () => {
 
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setData({ email: "", password: "" });
-  };
-
-  const handleClick = async () => {
     try {
       const res = await axios.post(`${BASE_URL}/users/login`, data, {
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         withCredentials: true,
       });
+
       if (res.data.success) {
         toast.success(res.data.message);
+        setData({ email: "", password: "" }); // Reset only after success
         navigate("/");
       }
     } catch (error) {
       toast.error(error.response?.data?.message || error.message);
     }
   };
+
   return (
     <div>
       <form
@@ -51,7 +48,7 @@ const SignIn = () => {
           value={data.password}
           onChange={(e) => setData({ ...data, password: e.target.value })}
         />
-        <Button className="cursor-pointer" type="Submit" onClick={handleClick}>
+        <Button className="cursor-pointer" type="submit">
           Sign In
         </Button>
         <p>

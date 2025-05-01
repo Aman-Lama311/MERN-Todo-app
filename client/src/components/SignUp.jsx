@@ -11,12 +11,8 @@ const SignUp = () => {
 
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setData({ fullName: "", email: "", password: "" });
-  };
-
-  const handleClick = async () => {
     try {
       const res = await axios.post(`${BASE_URL}/users/register`, data, {
         headers: {
@@ -24,14 +20,17 @@ const SignUp = () => {
         },
         withCredentials: true,
       });
+
       if (res.data.success) {
         toast.success(res.data.message);
+        setData({ fullName: "", email: "", password: "" }); // Clear form
         navigate("/signIn");
       }
     } catch (error) {
       toast.error(error.response?.data?.message || error.message);
     }
   };
+
   return (
     <div>
       <form
@@ -45,21 +44,19 @@ const SignUp = () => {
           value={data.fullName}
           onChange={(e) => setData({ ...data, fullName: e.target.value })}
         />
-
         <Input
           type="email"
           placeholder="Email"
           value={data.email}
           onChange={(e) => setData({ ...data, email: e.target.value })}
         />
-
         <Input
           type="password"
           placeholder="Password"
           value={data.password}
           onChange={(e) => setData({ ...data, password: e.target.value })}
         />
-        <Button className="cursor-pointer" type="Submit" onClick={handleClick}>
+        <Button type="submit" className="cursor-pointer">
           Sign Up
         </Button>
         <p>
