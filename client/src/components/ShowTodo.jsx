@@ -15,12 +15,9 @@ const ShowTodo = ({ refresh }) => {
 
   const getTodo = async () => {
     try {
-      const res = await axios.get(
-        "https://mern-todo-app-flax.vercel.app/todos",
-        {
-          withCredentials: true,
-        }
-      );
+      const res = await axios.get("http://localhost:8000/todos", {
+        withCredentials: true,
+      });
       if (res.data.success) {
         setData(res.data.todos);
       }
@@ -35,12 +32,9 @@ const ShowTodo = ({ refresh }) => {
 
   const handleDelete = async (id) => {
     try {
-      const res = await axios.delete(
-        `https://mern-todo-app-flax.vercel.app/todos/${id}`,
-        {
-          withCredentials: true,
-        }
-      );
+      const res = await axios.delete(`http://localhost:8000/todos/${id}`, {
+        withCredentials: true,
+      });
       if (res.data.success) {
         toast.success(res.data.message);
         setData((prevData) => prevData.filter((todo) => todo._id !== id));
@@ -64,7 +58,7 @@ const ShowTodo = ({ refresh }) => {
   const handleUpdate = async (id) => {
     try {
       const res = await axios.put(
-        `https://mern-todo-app-flax.vercel.app/todos/${id}`,
+        `http://localhost:8000/todos/${id}`,
         editTodo,
         { withCredentials: true }
       );

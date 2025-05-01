@@ -14,16 +14,12 @@ const Home = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post(
-        "https://mern-todo-app-flax.vercel.app/todos",
-        todos,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        }
-      );
+      const res = await axios.post("http://localhost:8000/todos", todos, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
 
       if (res.data.success) {
         toast.success(res.data.message);
