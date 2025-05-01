@@ -9,7 +9,7 @@ const SignUp = () => {
   const navigate = useNavigate();
   const [data, setData] = useState({ fullName: "", email: "", password: "" });
 
-  const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+  const BASE_URL = process.env.VITE_API_BASE_URL;
 
   const handleSubmit = (e) => {
     e.preventDefault();
