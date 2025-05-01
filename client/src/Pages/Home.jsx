@@ -11,6 +11,7 @@ const Home = () => {
   const [refresh, setRefresh] = useState(false); // to trigger re-fetch in ShowTodo
 
   const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+  console.log("BASE_URL", BASE_URL);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
