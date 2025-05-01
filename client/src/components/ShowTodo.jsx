@@ -13,6 +13,8 @@ const ShowTodo = ({ refresh, BASE_URL }) => {
   const [editId, setEditId] = useState(null);
   const [editTodo, setEditTodo] = useState({ title: "", description: "" });
 
+  console.log(BASE_URL);
+
   const getTodo = async () => {
     try {
       const res = await axios.get(`${BASE_URL}/todos`, {
