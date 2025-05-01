@@ -55,7 +55,7 @@ const Home = () => {
         </Button>
       </form>
 
-      <ShowTodo refresh={refresh} BASE_URL={BASE_URL} />
+      <ShowTodo refresh={refresh} />
     </div>
   );
 };

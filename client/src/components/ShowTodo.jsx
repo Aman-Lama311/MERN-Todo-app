@@ -8,12 +8,12 @@ import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
 
-const ShowTodo = ({ refresh, BASE_URL }) => {
+const ShowTodo = ({ refresh }) => {
   const [data, setData] = useState([]);
   const [editId, setEditId] = useState(null);
   const [editTodo, setEditTodo] = useState({ title: "", description: "" });
 
-  console.log(BASE_URL);
+  const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   const getTodo = async () => {
     try {
