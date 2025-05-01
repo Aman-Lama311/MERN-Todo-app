@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "https://mern-todo-app-c4ui.vercel.app",
+    origin: "https://mern-todo-app-c4ui.vercel.app/",
     credentials: true,
   })
 );
