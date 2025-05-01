@@ -24,6 +24,10 @@ app.use(
 app.use("/users", userRoute);
 app.use("/todos", todoRoute);
 
+app.get("/", (req, res) => {
+  res.send("Backend is running successfully!");
+});
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
