@@ -10,20 +10,18 @@ const Home = () => {
   const [todos, setTodos] = useState({ title: "", description: "" });
   const [refresh, setRefresh] = useState(false); // to trigger re-fetch in ShowTodo
 
+  const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const res = await axios.post(
-        `${process.env.REACT_APP_API_BASE_URL}/todos`,
-        todos,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        }
-      );
+      const res = await axios.post(`${BASE_URL}/todos`, todos, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
 
       if (res.data.success) {
         toast.success(res.data.message);
@@ -56,7 +54,7 @@ const Home = () => {
         </Button>
       </form>
 
-      <ShowTodo refresh={refresh} />
+      <ShowTodo refresh={refresh} BASE_URL={BASE_URL} />
     </div>
   );
 };

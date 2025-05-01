@@ -8,19 +8,16 @@ import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
 
-const ShowTodo = ({ refresh }) => {
+const ShowTodo = ({ refresh, BASE_URL }) => {
   const [data, setData] = useState([]);
   const [editId, setEditId] = useState(null);
   const [editTodo, setEditTodo] = useState({ title: "", description: "" });
 
   const getTodo = async () => {
     try {
-      const res = await axios.get(
-        `${process.env.REACT_APP_API_BASE_URL}/todos`,
-        {
-          withCredentials: true,
-        }
-      );
+      const res = await axios.get(`${BASE_URL}/todos`, {
+        withCredentials: true,
+      });
       if (res.data.success) {
         setData(res.data.todos);
       }
@@ -35,12 +32,9 @@ const ShowTodo = ({ refresh }) => {
 
   const handleDelete = async (id) => {
     try {
-      const res = await axios.delete(
-        `${process.env.REACT_APP_API_BASE_URL}/todos/${id}`,
-        {
-          withCredentials: true,
-        }
-      );
+      const res = await axios.delete(`${BASE_URL}/todos/${id}`, {
+        withCredentials: true,
+      });
       if (res.data.success) {
         toast.success(res.data.message);
         setData((prevData) => prevData.filter((todo) => todo._id !== id));
@@ -63,11 +57,9 @@ const ShowTodo = ({ refresh }) => {
 
   const handleUpdate = async (id) => {
     try {
-      const res = await axios.put(
-        `${process.env.REACT_APP_API_BASE_URL}/todos/${id}`,
-        editTodo,
-        { withCredentials: true }
-      );
+      const res = await axios.put(`${BASE_URL}/todos/${id}`, editTodo, {
+        withCredentials: true,
+      });
       if (res.data.success) {
         toast.success(res.data.message);
         setData((prevData) =>
