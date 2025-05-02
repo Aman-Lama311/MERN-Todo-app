@@ -85,8 +85,17 @@ export const login = async (req, res) => {
   }
 };
 
-export const logout = async (_, res) => {
+export const logout = async (req, res) => {
   try {
+    const token = req.cookies?.token;
+
+    if (!token) {
+      return res.status(400).json({
+        success: false,
+        message: "User is already logged out",
+      });
+    }
+
     return res
       .status(200)
       .cookie("token", "", {
