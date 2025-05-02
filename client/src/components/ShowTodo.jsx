@@ -82,66 +82,63 @@ const ShowTodo = ({ refresh, BASE_URL }) => {
     }
   };
 
-  return load ? (
-    <h1
-      className="text-2
-   font-semibold"
-    >
-      Loading ...
-    </h1>
-  ) : (
+  return (
     <div className="space-y-4">
       <h1 className="text-2xl font-semibold">Todos Lists :)</h1>
-      {data.map((todo) => (
-        <Card key={todo._id}>
-          <CardHeader className="flex justify-between items-center">
-            <div className="w-full">
-              {editId === todo._id ? (
-                <div className="space-y-2 max-w-md">
-                  <Input
-                    value={editTodo.title}
-                    onChange={(e) =>
-                      setEditTodo({ ...editTodo, title: e.target.value })
-                    }
-                  />
-                  <Textarea
-                    value={editTodo.description}
-                    onChange={(e) =>
-                      setEditTodo({
-                        ...editTodo,
-                        description: e.target.value,
-                      })
-                    }
-                  />
-                  <Button
-                    className="mt-2 cursor-pointer"
-                    onClick={() => handleUpdate(todo._id)}
-                  >
-                    Save
-                  </Button>
-                </div>
-              ) : (
-                <>
-                  <CardTitle>{todo.title}</CardTitle>
-                  <CardDescription>{todo.description}</CardDescription>
-                </>
-              )}
-            </div>
-            <div className="flex gap-6 items-start mt-2">
-              <GrDocumentUpdate
-                className="cursor-pointer"
-                size={22}
-                onClick={() => toggleEdit(todo)}
-              />
-              <RiDeleteBin6Fill
-                className="cursor-pointer"
-                size={24}
-                onClick={() => handleDelete(todo._id)}
-              />
-            </div>
-          </CardHeader>
-        </Card>
-      ))}
+      {data.map((todo) =>
+        load ? (
+          <p>Loading ...</p>
+        ) : (
+          <Card key={todo._id}>
+            <CardHeader className="flex justify-between items-center">
+              <div className="w-full">
+                {editId === todo._id ? (
+                  <div className="space-y-2 max-w-md">
+                    <Input
+                      value={editTodo.title}
+                      onChange={(e) =>
+                        setEditTodo({ ...editTodo, title: e.target.value })
+                      }
+                    />
+                    <Textarea
+                      value={editTodo.description}
+                      onChange={(e) =>
+                        setEditTodo({
+                          ...editTodo,
+                          description: e.target.value,
+                        })
+                      }
+                    />
+                    <Button
+                      className="mt-2 cursor-pointer"
+                      onClick={() => handleUpdate(todo._id)}
+                    >
+                      Save
+                    </Button>
+                  </div>
+                ) : (
+                  <>
+                    <CardTitle>{todo.title}</CardTitle>
+                    <CardDescription>{todo.description}</CardDescription>
+                  </>
+                )}
+              </div>
+              <div className="flex gap-6 items-start mt-2">
+                <GrDocumentUpdate
+                  className="cursor-pointer"
+                  size={22}
+                  onClick={() => toggleEdit(todo)}
+                />
+                <RiDeleteBin6Fill
+                  className="cursor-pointer"
+                  size={24}
+                  onClick={() => handleDelete(todo._id)}
+                />
+              </div>
+            </CardHeader>
+          </Card>
+        )
+      )}
     </div>
   );
 };
