@@ -10,9 +10,11 @@ const Header = () => {
   const navigate = useNavigate();
   const [visible, setVisible] = useState(false);
 
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
   const handleLogout = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/users/logout", {
+      const res = await axios.get(`${BASE_URL}/users/logout`, {
         withCredentials: true,
       });
       if (res.data.success) {
