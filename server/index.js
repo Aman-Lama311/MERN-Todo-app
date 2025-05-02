@@ -6,6 +6,7 @@ import bodyParser from "body-parser";
 import todoRoute from "./routes/todoRoute.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import compression from "compression";
 dotenv.config();
 
 connectDB();
@@ -20,6 +21,7 @@ app.use(
     credentials: true,
   })
 );
+app.use(compression());
 
 app.use("/users", userRoute);
 app.use("/todos", todoRoute);

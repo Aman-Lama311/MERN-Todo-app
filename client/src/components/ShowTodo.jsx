@@ -12,8 +12,10 @@ const ShowTodo = ({ refresh, BASE_URL }) => {
   const [data, setData] = useState([]);
   const [editId, setEditId] = useState(null);
   const [editTodo, setEditTodo] = useState({ title: "", description: "" });
+  const [load, setLoad] = useState(false);
 
   const getTodo = async () => {
+    setLoad(true);
     try {
       const res = await axios.get(`${BASE_URL}/todos`, {
         withCredentials: true,
@@ -21,6 +23,7 @@ const ShowTodo = ({ refresh, BASE_URL }) => {
       if (res.data.success) {
         setData(res.data.todos);
       }
+      setLoad(false);
     } catch (error) {
       toast.error(error.response?.data?.message || error.message);
     }
@@ -29,6 +32,10 @@ const ShowTodo = ({ refresh, BASE_URL }) => {
   useEffect(() => {
     getTodo();
   }, [refresh]);
+
+  // if (load) {
+  //   return <h1 className="text-2xl font-semibold">Loading....</h1>;
+  // }
 
   const handleDelete = async (id) => {
     try {
@@ -75,7 +82,9 @@ const ShowTodo = ({ refresh, BASE_URL }) => {
     }
   };
 
-  return (
+  return load ? (
+    <h1 className="text-2xl font-semibold">Loading ...</h1>
+  ) : (
     <div className="space-y-4">
       <h1 className="text-2xl font-semibold">Todos Lists :)</h1>
       {data.map((todo) => (
